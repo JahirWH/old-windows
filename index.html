@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Windows 95</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="escritorio">
+        <!-- Iconos del escritorio -->
+        <div class="iconos-escritorio">
+            <div class="icono-escritorio" onclick="abrirVentana('miPC')">
+                <!-- <img src="https://win98icons.alexmeub.com/icons/png/my_computer-0.png" alt="Mi PC"> -->
+                <span>Mi PC</span>
+            </div>
+            <div class="icono-escritorio" onclick="abrirVentana('papelera')">
+                <img src="https://win98icons.alexmeub.com/icons/png/recycle_bin_empty-0.png" alt="Papelera">
+                <span>Papelera</span>
+            </div>
+        </div>
+
+        <!-- Menú de inicio -->
+        <div class="menu-inicio" id="menuInicio">
+            <div class="encabezado-menu">
+                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="Windows">
+                <span>Windows 95</span>
+            </div>
+            <div class="elementos-menu">
+                <div class="elemento-menu" onclick="abrirVentana('blocNotas')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Bloc de notas">
+                    <span>Bloc de notas</span>
+                </div>
+                <div class="elemento-menu" onclick="abrirVentana('paint')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/paint-0.png" alt="Paint">
+                    <span>Paint</span>
+                </div>
+                <div class="elemento-menu" onclick="abrirVentana('calculadora')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/calculator-0.png" alt="Calculadora">
+                    <span>Calculadora</span>
+                </div>
+                <div class="elemento-menu" onclick="abrirVentana('solitario')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/solitaire-0.png" alt="Solitario">
+                    <span>Solitario</span>
+                </div>
+                <div class="elemento-menu" onclick="abrirVentana('buscaminas')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/minesweeper-0.png" alt="Buscaminas">
+                    <span>Buscaminas</span>
+                </div>
+                <div class="elemento-menu" onclick="abrirVentana('cmd')">
+                    <img src="https://win98icons.alexmeub.com/icons/png/command_prompt-0.png" alt="Símbolo del sistema">
+                    <span>Símbolo del sistema</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventanas de aplicaciones -->
+        <div class="ventana" id="blocNotas" style="display: none;">
+            <div class="barra-titulo">
+                <span class="texto-titulo">Bloc de notas</span>
+                <div class="controles-ventana">
+                    <button class="control-ventana minimizar" onclick="minimizarVentana('blocNotas')">_</button>
+                    <button class="control-ventana maximizar" onclick="maximizarVentana('blocNotas')">□</button>
+                    <button class="control-ventana cerrar" onclick="cerrarVentana('blocNotas')">×</button>
+                </div>
+            </div>
+            <div class="contenido-ventana">
+                <div class="barra-menu">
+                    <div class="elemento-menu">Archivo</div>
+                    <div class="elemento-menu">Editar</div>
+                    <div class="elemento-menu">Formato</div>
+                    <div class="elemento-menu">Ayuda</div>
+                </div>
+                <div class="area-contenido">
+                    <textarea class="area-texto" placeholder="Escribe aquí..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="ventana" id="calculadora" style="display: none;">
+            <div class="barra-titulo">
+                <span class="texto-titulo">Calculadora</span>
+                <div class="controles-ventana">
+                    <button class="control-ventana minimizar" onclick="minimizarVentana('calculadora')">_</button>
+                    <button class="control-ventana maximizar" onclick="maximizarVentana('calculadora')">□</button>
+                    <button class="control-ventana cerrar" onclick="cerrarVentana('calculadora')">×</button>
+                </div>
+            </div>
+            <div class="contenido-ventana">
+                <div class="pantalla-calculadora">0</div>
+                <div class="botones-calculadora">
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                    <button>/</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button>*</button>
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>-</button>
+                    <button>0</button>
+                    <button>.</button>
+                    <button>=</button>
+                    <button>+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de tareas -->
+        <div class="barra-tareas">
+            <div class="boton-inicio" onclick="alternarMenuInicio()">
+                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="Inicio">
+                <span>Inicio</span>
+            </div>
+            <div class="programas-activos" id="programasActivos">
+                <!-- Los programas abiertos se agregarán aquí -->
+            </div>
+            <div class="bandeja-sistema">
+                <div class="elemento-bandeja" id="reloj">12:00</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
