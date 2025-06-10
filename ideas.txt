@@ -1,0 +1,3 @@
+ideas
+Agregar backgounds elejibles y un autologin para el guardado de preferencias , iconos
+posiciones y programas online

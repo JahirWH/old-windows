@@ -55,6 +55,7 @@ body {
     border-color: #ffffff #808080 #808080 #ffffff;
     display: none;
     z-index: 1000;
+    overflow: scroll;
 }
 
 .encabezado-menu {
