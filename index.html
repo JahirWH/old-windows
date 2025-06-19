@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador Windows 95</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        if (!sessionStorage.getItem('startupShown')) {
+            window.location.href = 'startup.html';
+        }
+    </script>
 </head>
 <body>
     <div class="escritorio">
         <!-- Iconos del escritorio -->
         <div class="iconos-escritorio">
             <div class="icono-escritorio" onclick="abrirVentana('miPC')">
-                <img src="https://win98icons.alexmeub.com/icons/png/my_computer-0.png" alt="Mi PC">
-                <!-- <span>Mi PC</span> -->
+                <img src="img/ocup/computer-0.png" alt="Mi PC">
+                <span>Mi PC</span>
             </div>
             <div class="icono-escritorio" onclick="abrirVentana('papelera')">
-                <img src="https://win98icons.alexmeub.com/icons/png/recycle_bin_empty-0.png" alt="Papelera">
+                <img src="img/ocup/recycle_bin_empty-0.png" alt="Papelera">
                 <span>Papelera</span>
             </div>
         </div>
@@ -23,32 +28,32 @@
         <!-- Menú de inicio -->
         <div class="menu-inicio" id="menuInicio">
             <div class="encabezado-menu">
-                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="Windows">
+                <img src="img/ocup/windows-0.png" alt="Windows">
                 <span>Windows 95</span>
             </div>
             <div class="elementos-menu">
                 <div class="elemento-menu" onclick="abrirVentana('blocNotas')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/notepad-0.png" alt="Bloc de notas">
+                    <img src="img/ocup/notepad-0.png" alt="Bloc de notas">
                     <span>Bloc de notas</span>
                 </div>
                 <div class="elemento-menu" onclick="abrirVentana('paint')">
-                    <img src="/img/paint.png" alt="Paint">
+                    <img src="img/ocup/file_blue_grad_paint-0.png" alt="Paint">
                     <span>Paint</span>
                 </div>
                 <div class="elemento-menu" onclick="abrirVentana('calculadora')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/calculator-0.png" alt="Calculadora">
+                    <img src="img/ocup/calculator-0.png" alt="Calculadora">
                     <span>Calculadora</span>
                 </div>
                 <div class="elemento-menu" onclick="abrirVentana('solitario')">
-                    <img src="/img/solitario.png" alt="Solitario">
+                    <img src="img/ocup/solitario.png" alt="Solitario">
                     <span>Solitario</span>
                 </div>
                 <div class="elemento-menu" onclick="abrirVentana('buscaminas')">
-                    <img src="https://win98icons.alexmeub.com/icons/png/minesweeper-0.png" alt="Buscaminas">
+                    <img src="img/ocup/minas.png" alt="Buscaminas">
                     <span>Buscaminas</span>
                 </div>
                 <div class="elemento-menu" onclick="abrirVentana('cmd')">
-                    <img src="/img/win.png" alt="Símbolo del sistema">
+                    <img src="img/ocup/windows-0.png" alt="Símbolo del sistema">
                     <span>Símbolo del sistema</span>
                 </div>
             </div>
@@ -109,18 +114,101 @@
             </div>
         </div>
 
+        <!-- Reloj y Calendario -->
+        <div class="cont-reloj" id="relojCalendario" style="display: none;">
+            <div class="reloj-seccion">
+                <div class="reloj-circulo">
+                    <div class="manecilla-hora"></div>
+                    <div class="manecilla-minuto"></div>
+                    <div class="manecilla-segundo"></div>
+                    <div class="centro-reloj"></div>
+                    <div class="marcas-hora">
+                        <span class="marca">12</span>
+                        <span class="marca">3</span>
+                        <span class="marca">6</span>
+                        <span class="marca">9</span>
+                    </div>
+                </div>
+                <div class="hora-digital" id="horaDigital">00:00:00</div>
+            </div>
+            <div class="calendario-seccion">
+                <div class="calendario-header">
+                    <button class="btn-calendario" onclick="cambiarMes(-1)">◀</button>
+                    <span id="mesAnio">Enero 2024</span>
+                    <button class="btn-calendario" onclick="cambiarMes(1)">▶</button>
+                </div>
+                <div class="dias-semana">
+                    <span>Do</span>
+                    <span>Lu</span>
+                    <span>Ma</span>
+                    <span>Mi</span>
+                    <span>Ju</span>
+                    <span>Vi</span>
+                    <span>Sa</span>
+                </div>
+                <div class="dias-mes" id="diasMes">
+                    <!-- Los días se generarán con JavaScript -->
+                </div>
+            </div>
+        </div>
+
         <!-- Barra de tareas -->
         <div class="barra-tareas">
             <div class="boton-inicio" onclick="alternarMenuInicio()">
-                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="Inicio">
+                <img src="img/ocup/windows-0.png" alt="Inicio">
                 <span>Inicio</span>
             </div>
             <div class="programas-activos" id="programasActivos">
                 <!-- Los programas abiertos se agregarán aquí -->
             </div>
             <div class="bandeja-sistema">
-                <div class="elemento-bandeja" id="reloj">12:00</div>
+                <div class="elemento-bandeja" onclick="reloj()" id="reloj">12:00</div>
             </div>
+        </div>
+
+        <!-- Explorador de archivos -->
+        <div class="ventana" id="exploradorArchivos" style="display: none; min-width: 600px; min-height: 400px;">
+            <div class="barra-titulo">
+                <span class="texto-titulo">Explorador de archivos</span>
+                <div class="controles-ventana">
+                    <button class="control-ventana minimizar" onclick="minimizarVentana('exploradorArchivos')">_</button>
+                    <button class="control-ventana maximizar" onclick="maximizarVentana('exploradorArchivos')">□</button>
+                    <button class="control-ventana cerrar" onclick="cerrarVentana('exploradorArchivos')">×</button>
+                </div>
+            </div>
+            <div class="contenido-ventana contenido-explorador">
+                <div class="barra-explorador">
+                    <button class="btn-explorador" onclick="volverAtras()">⯇</button>
+                    <span class="ruta-explorador" id="rutaExplorador">Mi PC</span>
+                </div>
+                <div class="explorador-cuerpo">
+                    <div class="panel-lateral">
+                        <div class="acceso-rapido" onclick="abrirRuta('Escritorio')">Escritorio</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Documentos')">Documentos</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Descargas')">Descargas</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Imágenes')">Imágenes</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Música')">Música</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Videos')">Videos</div>
+                        <div class="acceso-rapido" onclick="abrirRuta('Mi PC')">Mi PC</div>
+                    </div>
+                    <div class="panel-principal" id="panelPrincipal">
+                        <!-- aquí se renderizan  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-contextual" id="menuContextual" style="display:none;">
+            <div class="opcion-menu">Actualizar</div>
+            <div class="opcion-menu">Nuevo
+                <div class="submenu">
+                    <div class="opcion-menu">Carpeta</div>
+                    <div class="opcion-menu">Acceso directo</div>
+                    <div class="opcion-menu">Documento de texto</div>
+                </div>
+            </div>
+            <div class="opcion-menu">Organizar iconos</div>
+            <div class="opcion-menu">Propiedades</div>
         </div>
     </div>
     <script src="script.js"></script>

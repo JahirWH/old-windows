@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 95 Startup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000080;
+            color: white;
+            font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 20px;
+            background-color: #000080;
+            border: 1px solid white;
+            margin-top: 20px;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background-color: white;
+            transition: width 0.1s linear;
+        }
+
+        .status-text {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" alt="Windows 95 Logo" class="logo">
+    <div class="loading-bar">
+        <div class="loading-progress" id="progress"></div>
+    </div>
+    <div class="status-text" id="status">Iniciando Windows 95...</div>
+
+    <script>
+        const progress = document.getElementById('progress');
+        const status = document.getElementById('status');
+        const messages = [
+            'Iniciando Windows 95...',
+            'Cargando controladores...',
+            'Inicializando sistema...',
+            'Preparando escritorio...',
+            'Cargando programas...'
+        ];
+
+        let currentProgress = 0;
+        let messageIndex = 0;
+
+        function updateProgress() {
+            if (currentProgress < 100) {
+                currentProgress += Math.random() * 5;
+                if (currentProgress > 100) currentProgress = 100;
+                progress.style.width = currentProgress + '%';
+
+                if (messageIndex < messages.length && currentProgress > (messageIndex + 1) * 20) {
+                    status.textContent = messages[messageIndex];
+                    messageIndex++;
+                }
+
+                setTimeout(updateProgress, 100);
+            } else {
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    sessionStorage.setItem('startupShown', 'true');
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html> 
