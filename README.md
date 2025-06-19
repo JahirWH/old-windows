@@ -1,6 +1,6 @@
 # Windows 97/Vista Web Simulator
 
-![Banner](img/banner.webp)
+![Banner](banner.webp)
 
 ![Estado](https://img.shields.io/badge/estado-activo-brightgreen)
 ![Hecho%20con-JavaScript-blue](https://img.shields.io/badge/hecho%20con-JavaScript-blue)
